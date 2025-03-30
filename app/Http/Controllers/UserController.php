@@ -1,7 +1,8 @@
 <?php
 
     namespace App\Http\Controllers;
-
+    use App\Http\Requests\SortTasksRequest;
+    use Illuminate\Http\Request;
     use Illuminate\Http\JsonResponse;
     use App\Services\UserService;
     use App\Http\Requests\StoreUserRequest;
@@ -16,10 +17,14 @@
             $this->userService = $userService;
         }
 
-        public function index(): JsonResponse
+        public function index(SortTasksRequest $request): JsonResponse
         {
-            return response()->json($this->userService->getAllUsers());
+            $sortBy = $request->input('sort_by', 'first_name');
+            $sortOrder = $request->input('sort_order', 'asc');
+
+            return response()->json($this->userService->getAllUsers($sortBy, $sortOrder));
         }
+
 
         public function show(int $id): JsonResponse
         {

@@ -38,28 +38,10 @@
             return $this->belongsTo(User::class);
         }
 
-        public function scopeFilterAndSort(Builder $query, array $filters): Builder
-        {
-            if (!empty($filters['title'])) {
-                $query->where('title', 'like', '%' . $filters['title'] . '%');
-            }
-
-            if (!empty($filters['status']) && in_array($filters['status'], self::$allowedStatuses)) {
-                $query->where('status', $filters['status']);
-            }
-
-            if (!empty($filters['sort_by']) && in_array($filters['sort_by'], ['title', 'status'])) {
-                $sortOrder = $filters['sort_order'] ?? 'asc';
-                $query->orderBy($filters['sort_by'], $sortOrder);
-            }
-
-            return $query;
-        }
-
-        public static function getAllTasks(int $userId, array $filters)
+        public static function getAllTasks(int $userId, string $sortBy, string $sortOrder)
         {
             return self::where('user_id', $userId)
-                ->filterAndSort($filters)
+                ->orderBy($sortBy, $sortOrder)
                 ->paginate(10);
         }
 
@@ -117,6 +99,6 @@
                 ->toArray();
 
             return response()->json(['stats' => $stats], 200);
-
         }
+
     }

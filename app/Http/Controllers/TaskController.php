@@ -19,9 +19,22 @@
 
         public function index(Request $request, int $userId): JsonResponse
         {
-            $tasks = $this->taskService->getAllTasks($userId, $request->all());
+            // Validate the incoming request parameters for sorting
+            $validated = $request->validate([
+                'sort_by' => 'nullable|in:title,status', // Sort by title or status
+                'sort_order' => 'nullable|in:asc,desc',   // Sort order: asc or desc
+            ]);
+
+            // Get validated parameters
+            $sortBy = $validated['sort_by'] ?? 'title'; // Default sorting by title
+            $sortOrder = $validated['sort_order'] ?? 'asc'; // Default sorting order ascending
+
+            // Fetch the tasks with the given sorting parameters
+            $tasks = $this->taskService->getAllTasks($userId, $sortBy, $sortOrder);
+
             return response()->json($tasks);
         }
+
 
         public function show(int $userId, int $taskId): JsonResponse
         {

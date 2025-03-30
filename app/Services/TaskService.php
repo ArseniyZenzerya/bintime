@@ -8,9 +8,9 @@
 
     class TaskService
     {
-        public function getAllTasks(int $userId, array $filters)
+        public function getAllTasks(int $userId, string $sortBy, string $sortOrder)
         {
-            return Task::getAllTasks($userId, $filters);
+            return Task::getAllTasks($userId, $sortBy, $sortOrder);
         }
 
         public function getTaskById(int $userId, int $taskId): Task

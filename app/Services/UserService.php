@@ -7,10 +7,17 @@
 
     class UserService
     {
-        public function getAllUsers()
+        public function getAllUsers(string $sortBy = 'first_name', string $sortOrder = 'asc')
         {
-            return User::paginate(10);
+            $allowedSortFields = ['first_name', 'last_name', 'email'];
+
+            if (!in_array($sortBy, $allowedSortFields)) {
+                $sortBy = 'first_name';
+            }
+
+            return User::orderBy($sortBy, $sortOrder)->paginate(10);
         }
+
 
         public function getUserById(int $id)
         {
