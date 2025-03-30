@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
 
     use App\Http\Requests\StoreTaskRequest;
+    use App\Http\Requests\TaskSortRequest;
     use App\Http\Requests\UpdateTaskRequest;
     use App\Services\TaskService;
     use Illuminate\Http\JsonResponse;
@@ -17,19 +18,13 @@
             $this->taskService = $taskService;
         }
 
-        public function index(Request $request, int $userId): JsonResponse
+        public function index(TaskSortRequest $request, int $userId): JsonResponse
         {
-            // Validate the incoming request parameters for sorting
-            $validated = $request->validate([
-                'sort_by' => 'nullable|in:title,status', // Sort by title or status
-                'sort_order' => 'nullable|in:asc,desc',   // Sort order: asc or desc
-            ]);
+            $validated = $request->validated();
 
-            // Get validated parameters
-            $sortBy = $validated['sort_by'] ?? 'title'; // Default sorting by title
-            $sortOrder = $validated['sort_order'] ?? 'asc'; // Default sorting order ascending
+            $sortBy = $validated['sort_by'] ?? 'title';
+            $sortOrder = $validated['sort_order'] ?? 'asc';
 
-            // Fetch the tasks with the given sorting parameters
             $tasks = $this->taskService->getAllTasks($userId, $sortBy, $sortOrder);
 
             return response()->json($tasks);
