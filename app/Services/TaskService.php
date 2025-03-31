@@ -42,6 +42,7 @@
             if (isset($data['status']) && !in_array($data['status'], $allowedTransitions[$task->status] ?? [])) {
                 return response()->json(['error' => 'Invalid status transition.'], 403);
             }
+            $data['start_at'] = Carbon::createFromFormat('d-m-Y H:i', $data['start_at'])->format('Y-m-d H:i:s');
 
             return $task->updateTask($data);
         }

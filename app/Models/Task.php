@@ -8,6 +8,7 @@
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Database\QueryException;
     use Illuminate\Http\JsonResponse;
+    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
     class Task extends Model
     {
@@ -47,7 +48,13 @@
 
         public static function getTaskById(int $userId, int $taskId): self
         {
-            return self::where('user_id', $userId)->findOrFail($taskId);
+            $task = self::where('user_id', $userId)->find($taskId);
+
+            if (!$task) {
+                throw new NotFoundHttpException("Task with ID $taskId not found for user $userId.");
+            }
+
+            return $task;
         }
 
         public function updateTask(array $data): JsonResponse
@@ -101,4 +108,12 @@
             return response()->json(['stats' => $stats], 200);
         }
 
+        public function deleteTask(): JsonResponse
+        {
+            if ($this->delete()) {
+                return response()->json(['message' => 'Task deleted successfully'], 200);
+            }
+
+            return response()->json(['error' => 'Failed to delete task'], 400);
+        }
     }

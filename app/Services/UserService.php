@@ -53,6 +53,9 @@
 
         public function deleteUser(int $id)
         {
-            return User::destroy($id);
+            return User::destroy($id) ?
+                response()->json(['message' => 'Deleted successfully'], 200)
+                :
+                response()->json(['error' => 'Delete failed'], 400);
         }
     }

@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "04da6587-d935-455f-b860-db59b3fe04c6",
+		"name": "Bintime",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users?sort_order=asc&sort_by=email",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "sort_order",
+									"value": "asc"
+								},
+								{
+									"key": "sort_by",
+									"value": "email"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4?login=newlogin",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "newlogin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/8",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "TestLogin",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "testpassword1_",
+									"type": "default"
+								},
+								{
+									"key": "first_name",
+									"value": "TestN",
+									"type": "default"
+								},
+								{
+									"key": "last_name",
+									"value": "TestLn",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks/2",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test Title",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "Test desc",
+									"type": "default"
+								},
+								{
+									"key": "start_at",
+									"value": "30-10-2025 10:12",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "test Title",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Test desc",
+									"disabled": true
+								},
+								{
+									"key": "start_at",
+									"value": "30-10-2025 10:12",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks/3?status=In Progress",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks",
+								"3"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "test Title1",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Test desc1",
+									"disabled": true
+								},
+								{
+									"key": "start_at",
+									"value": "30-10-2025 10:11",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "In Progress"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get stats by User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/users/4/tasks/stats",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"4",
+								"tasks",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get stats by All users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/tasks/stats",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
